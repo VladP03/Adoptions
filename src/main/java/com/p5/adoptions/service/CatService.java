@@ -22,7 +22,7 @@ public class CatService {
     }
 
     public void addCat(CatDTO catDTO) {
-        if (catDTO.getName() == null && catDTO.getPhotoUrl() == null) {
+        if (catDTO.getName() == null || catDTO.getPhotoUrl() == null || catDTO.getName().equals("")) {
             throw new RuntimeException("Cat must have a name and a photo url!");
         }
 

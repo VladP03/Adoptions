@@ -9,7 +9,11 @@ import java.util.List;
 public class CatAdapter {
 
     public static Cat fromDTO(CatDTO catDTO) {
-        return new Cat()
+        if (catDTO.getName().equals("")) {
+            catDTO.setName("Generic cat");
+        }
+
+        return (Cat) new Cat()
                 .setName(catDTO.getName())
                 .setUrl(catDTO.getPhotoUrl());
     }

@@ -9,7 +9,11 @@ import java.util.List;
 public class DogAdapter {
 
     public static Dog fromDTO(DogDTO dogDTO) {
-        return new Dog()
+        if (dogDTO.getName().equals("")) {
+            dogDTO.setName("Generic dog");
+        }
+
+        return (Dog) new Dog()
                 .setName(dogDTO.getName())
                 .setUrl(dogDTO.getPhotoUrl());
     }

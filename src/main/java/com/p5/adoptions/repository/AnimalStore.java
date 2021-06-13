@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AnimalStore {
 
-    private static List<Animal> animalList= new ArrayList<>();
+    private static List<AnimalDTO> animalList= new ArrayList<>();
 
     static {
         animalList.add(new DogDTO("Alfi", "https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb.jpg", 1));
@@ -19,15 +19,15 @@ public class AnimalStore {
     }
 
 
-    public static List<Animal> available () {
+    public static List<AnimalDTO> available () {
         return animalList;
     }
 
-    public static void addAnimal(Animal animal) {
+    public static void addAnimal(AnimalDTO animal) {
         animalList.add(animal);
     }
 
-    public static void removeAnimal(Animal animal) {
+    public static void removeAnimal(AnimalDTO animal) {
         animalList.remove(animal);
     }
 }

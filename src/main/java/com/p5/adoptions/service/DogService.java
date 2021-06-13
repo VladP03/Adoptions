@@ -19,7 +19,7 @@ public class DogService {
     }
 
     public void addDog (DogDTO dogDTO) {
-        if (dogDTO.getName() == null || dogDTO.getName() == "") {
+        if (dogDTO.getName() == null || dogDTO.getName().equals("")) {
             throw new RuntimeException("Dog must have an name!");
         }
 
