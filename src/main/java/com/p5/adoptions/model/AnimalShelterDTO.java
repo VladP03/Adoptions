@@ -1,16 +1,27 @@
 package com.p5.adoptions.model;
 
-import com.p5.adoptions.repository.animals.Animal;
+import com.p5.adoptions.model.validations.OnCreate;
+import com.p5.adoptions.model.validations.OnUpdate;
 
+import javax.validation.constraints.*;
 import java.util.List;
 import java.util.ArrayList;
 
 public class AnimalShelterDTO {
 
+    @Null(message = "Id must be null for creation", groups = OnCreate.class)
+    @NotNull(message = "Id must not be null for update", groups = OnUpdate.class)
+    @Min(value = 1, groups = OnUpdate.class)
     private Integer id;
+
+    @NotNull(message = "Name must not be null", groups = {OnUpdate.class, OnCreate.class})
     private String name;
+
+    @NotNull(message = "Adrees must not be null", groups = {OnUpdate.class, OnCreate.class})
     private String address;
-    List<AnimalDTO> animal = new ArrayList<>();
+
+    @NotNull(message = "List of animals must not be null", groups = {OnUpdate.class, OnCreate.class})
+    private List<AnimalDTO> animal = new ArrayList<>();
 
     public Integer getId() {
         return id;
