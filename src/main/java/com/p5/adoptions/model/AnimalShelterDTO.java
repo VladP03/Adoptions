@@ -14,13 +14,13 @@ public class AnimalShelterDTO {
     @Min(value = 1, groups = OnUpdate.class)
     private Integer id;
 
-    @NotNull(message = "Name must not be null", groups = {OnUpdate.class, OnCreate.class})
+    @NotNull(message = "Name must not be null")
     private String name;
 
-    @NotNull(message = "Adrees must not be null", groups = {OnUpdate.class, OnCreate.class})
+    @NotNull(message = "Adrees must not be null")
     private String address;
 
-    @NotNull(message = "List of animals must not be null", groups = {OnUpdate.class, OnCreate.class})
+    @NotNull(message = "List of animals must not be null")
     private List<AnimalDTO> animal = new ArrayList<>();
 
     public Integer getId() {

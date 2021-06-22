@@ -6,6 +6,9 @@ import com.p5.adoptions.model.adapters.AnimalShelterAdapter;
 import com.p5.adoptions.model.validations.OnCreate;
 import com.p5.adoptions.model.validations.OnUpdate;
 import com.p5.adoptions.repository.shelter.AnimalShelterRepository;
+import com.p5.adoptions.service.exceptions.AnimalShelterNotFoundException;
+import com.p5.adoptions.service.exceptions.ShelterAddressException;
+import com.p5.adoptions.service.exceptions.Violation;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -46,10 +49,10 @@ public class AnimalShelterService {
 
     private void validateShelter(AnimalShelterDTO shelterDTO) {
 
-        animalShelterRepository.findById(shelterDTO.getId()).orElseThrow(() -> new RuntimeException("Shelter not found"));
+        animalShelterRepository.findById(shelterDTO.getId()).orElseThrow(() -> new AnimalShelterNotFoundException("Shelter not found"));
 
         if (!shelterDTO.getAddress().toLowerCase(Locale.ROOT).contains("iasi")) {
-            throw new RuntimeException("Shelter is not from Iasi");
+            throw new ShelterAddressException(new Violation("address", "Shelter is not from Iasi", shelterDTO.getAddress()));
         }
 
         for (AnimalDTO animal : shelterDTO.getAnimals()) {

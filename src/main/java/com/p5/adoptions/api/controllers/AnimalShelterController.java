@@ -5,6 +5,7 @@ import com.p5.adoptions.service.AnimalShelterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,12 +29,12 @@ public class AnimalShelterController {
     }
 
     @PostMapping
-    private ResponseEntity<AnimalShelterDTO> createShelter(@RequestBody AnimalShelterDTO shelterDTO) {
+    private ResponseEntity<AnimalShelterDTO> createShelter(@Valid @RequestBody AnimalShelterDTO shelterDTO) {
         return ResponseEntity.ok(shelterService.createShelter(shelterDTO));
     }
 
     @PutMapping
-    private ResponseEntity<AnimalShelterDTO> updateShelter(@RequestBody AnimalShelterDTO shelterDTO) {
+    private ResponseEntity<AnimalShelterDTO> updateShelter(@Valid @RequestBody AnimalShelterDTO shelterDTO) {
         return ResponseEntity.ok(shelterService.updateShelter(shelterDTO));
     }
 }
