@@ -6,7 +6,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
 
@@ -18,7 +19,12 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+        return principal.getUserRoles().stream()
+                .filter(Objects::nonNull)                                       // stream cu obiecte non-nule
+                .filter(el -> el.getRole() != null)                             // stream unde rolul nu e null
+                .filter(el -> !el.getRole().name().isEmpty())                   // s.a.m.d
+                .map(el -> new SimpleGrantedAuthority(el.getRole().name()))
+                .collect(Collectors.toSet());
     }
 
     @Override
